@@ -1,0 +1,77 @@
+
+<!--ProsperCode-->
+
+</!DOCTYPE html>
+<html>
+<head>
+	<title>send an Email</title>
+</head>
+<body>
+
+<center>
+
+	<h3 class="sent-notification"></h3>
+
+<form id="myForm">
+	<h1>Contact us please</h1>
+
+	<label>Your name</label>
+	<input id="name" name="text" placeholder="Enter your name">
+	<br><br>
+    <label>Your email</label>
+	<input id="email" name="text" placeholder="Enter your email">
+	<br><br>
+	<label>Your subject</label>
+	<input id="subject" name="text" placeholder="Enter your subject" >
+    <br><br>
+	<h3>message</h3>
+	<textarea id="body" rows="5" placeholder="message please"></textarea>
+    <br><br>
+	<button type="button" onclick="sendEmail()" value="send an Email" >submit</button>
+
+</form>
+</center>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	function sendEmail(){
+
+		var name = $("#name");
+		var email =$("#email");
+		var subject =&("#subject");
+		var body = $("#body");
+
+		if(isNotEmpty(name) $$ isNotEmpty(email) $$ isNotEmpty(subject) $$ isNotEmpty(body)){
+			$.ajax({
+				url : 'sendEmail.php',
+				method : 'POST';
+				DataType : 'json',
+				Data: {
+					name = name.val(),
+					email = email.val(),
+					subject =subject.val(),
+					body = body.val()
+				},success:function(respond){
+					$('#myForm')[0].reset();
+					&('.sent-notification').text("message is sent.");
+				}
+
+			})
+		}
+	}
+
+	function isNotEmpty(caller){
+		if (caller.val()==""){
+			caller.css('border', '1px solid red');
+			return false;
+		}
+		else
+		{
+			caller.css('border', '');
+			return true;
+		}
+	}
+</script>
+
+</body>
+</html>
